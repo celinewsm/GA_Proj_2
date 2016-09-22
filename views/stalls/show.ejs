@@ -1,0 +1,31 @@
+<h1><%= stall.name %></h1>
+
+<h1>Information on stall</h1>
+
+
+<form action="/" method="PUT" role="form">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="textarea" class="form-control" id="name" name="name" value="<%= stall.name %>" >
+  </div>
+  <div class="form-group">
+    <label for="name">Address</label>
+    <input type="textarea" class="form-control" id="address" value="<%= stall.address %>" name="address">
+  </div>
+  <div class="form-group">
+    <label for="name">Account Manager</label>
+    <input type="textarea" class="form-control" id="accountMgr" value="<%= stall.accountMgr %>" name="accountMgr">
+  </div>
+  <div class="form-group">
+    <label for="name">Last Order</label>
+    <input type="textarea" class="form-control" id="lastOrders" value="<%= stall.lastOrders %>" name="lastOrders">
+  </div>
+  <div class="form-group">
+    <label for="name">Contact Number</label>
+    <input type="textarea" class="form-control" id="contactNo" value="<%= stall.contactNo %>" name="contactNo">
+  </div>
+
+  <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>
+
+<a href="/">&larr; Back</a>
