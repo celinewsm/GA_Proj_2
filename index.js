@@ -10,6 +10,7 @@ var router = require('./config/routes')
 const dotenv = require('dotenv')
 dotenv.load()
 
+
 app.use(express.static(__dirname + '/public/'));
 app.set('view engine', 'ejs');
 
@@ -29,9 +30,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(function(req, res, next) {
-  // before every route, attach the flash messages and current user to res.locals
+  // before every route, attach the flash messages and current member to res.locals
   res.locals.alerts = req.flash();
-  res.locals.currentUser = req.user;
+  res.locals.currentMember = req.member;
   next();
 });
 

@@ -2,8 +2,7 @@
 
 <h1>Information on stall</h1>
 
-
-<form action="/" method="PUT" role="form">
+<form id="<%= stall.id %>" role="form" class="edit-form">
   <div class="form-group">
     <label for="name">Name</label>
     <input type="textarea" class="form-control" id="name" name="name" value="<%= stall.name %>" >
@@ -25,7 +24,13 @@
     <input type="textarea" class="form-control" id="contactNo" value="<%= stall.contactNo %>" name="contactNo">
   </div>
 
-  <button type="submit" class="btn btn-primary">Save Changes</button>
+  <button type="submit" class="btn btn-primary " >Save Changes</button>
 </form>
+<br>
+<form role="form" id="<%= stall.id %>" class="delete-entry">
+  <button type="submit" class="btn btn-primary " >Delete Stall Entry</button>
+</form>
+
+
 
 <a href="/">&larr; Back</a>

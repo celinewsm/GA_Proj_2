@@ -13,7 +13,7 @@ var options = {
   provider: 'google',
   // Optional depending on the providers
   httpAdapter: 'https', // Default
-  apiKey: 'AIzaSyBNEuahujgW6PKmTndNwf6yDxzGm20-TBc', // for Mapquest, OpenCage, Google Premier
+  apiKey: 'AIzaSyCh3jTzAD9ZLWRMbmyDPBnE-5xjcUJ9QLk', // for Mapquest, OpenCage, Google Premier
   formatter: null         // 'gpx', 'string', ...
 };
 var geocoder = NodeGeocoder(options);
@@ -25,6 +25,16 @@ router.get('/', function(req, res) {
 });
 /////////////////////////////////////////////////GET /
 
+
+/////////////////////////////////////////////////GET /<ALL>stalls
+router.get('/stalls', function (req, res){
+  db.stall.findAll().then(function(stalls) {
+    res.json(stalls)
+    // res.render('stalls/all', {stalls: stalls});
+    // res.render('index', {stalls: stalls})
+  });
+})
+/////////////////////////////////////////////////GET /<ALL>stalls
 
 /////////////////////////////////////////////////GET /id
 router.get('/stalls/:id', function (req, res){
@@ -42,6 +52,53 @@ router.get('/stalls/:id', function (req, res){
 
 
 
+/////////////////////////////////////////////////PUT /
+router.put('/', function(req, res) {
+
+  db.stall.update({
+    name: req.body.name,
+    address: req.body.address,
+    accountMgr: req.body.accountMgr,
+    lastOrders: req.body.lastOrders,
+    contactNo: req.body.contactNo
+  }, {
+    where: {
+      id: parseInt(req.body.id)
+    }
+  }).then(function(){
+    res.redirect('/');
+    // db.stall.findById(req.params.id).then(function(stall)  {
+    //   res.render('stalls/show', {stall: stall})
+    // })
+  });
+});
+/////////////////////////////////////////////////PUT /
+
+
+
+
+/////////////////////////////////////////////////PUT /stalls/:id
+router.put('/stalls/:id', function(req, res) {
+  db.stall.update({
+    name: req.body.name,
+    address: req.body.address,
+    accountMgr: req.body.accountMgr,
+    lastOrders: req.body.lastOrders,
+    contactNo: req.body.contactNo
+  }, {
+    where: {
+      id: req.params.id
+    }
+  }).then(function(){
+    db.stall.findById(req.params.id).then(function(stall)  {
+      res.render('stalls/show', {stall: stall})
+    })
+  });
+});
+/////////////////////////////////////////////////PUT /stalls/:id
+
+
+
 /////////////////////////////////////////////////POST /
 router.post('/', function(req, res) {
   geocoder.geocode({address: req.body.address, country: 'Singapore'}, function(err, geoOutput) {
@@ -49,11 +106,10 @@ router.post('/', function(req, res) {
     var outputLng = parseFloat(geoOutput[0].longitude);
     req.body.lat = outputLat;
     req.body.lng = outputLng;
-    db.stall.create(req.body).then(function(taco) {
+    db.stall.create(req.body).then(function() {
       res.redirect('/');
     }).catch(function(err) {
       res.status(500).render('error');
-      console.log(err);
     });
   });
 });
@@ -61,12 +117,10 @@ router.post('/', function(req, res) {
 
 
 
-
-
-router.put('/:id', function(req, res) {
-  db.stall.findById(req.params.id).then(function(taco) {
-    if (taco) {
-      taco.updateAttributes(req.body).then(function() {
+router.delete('/stalls/:id', function(req, res) {
+  db.stall.findById(req.params.id).then(function(stall) {
+    if (stall) {
+      stall.destroy().then(function() {
         res.send({msg: 'success'});
       });
     } else {
@@ -77,15 +131,12 @@ router.put('/:id', function(req, res) {
   });
 });
 
+router.get('/stallinfo/:id', function(req,res){
+  db.stall.findById(req.params.id).then(function(stall) {
 
-router.get('/stalls', function (req, res){
-  db.stall.findAll().then(function(stalls) {
-    res.json(stalls)
-    // res.render('index', {stalls: stalls})
+      res.json(stall);
   });
 })
-
-
 
 
 module.exports = router;

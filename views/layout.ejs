@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Fishballs</title>
 
+
     <!-- Bootstrap CSS -->
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 
@@ -15,9 +16,16 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Mapbox -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@0.7.7/dist/leaflet.css" />
+
+
   </head>
   <body>
-    <div class="container">
+    <div class="container noMargin oneHundWid">
       <%- body %>
     </div>
 
@@ -30,7 +38,12 @@
     <script src="//code.jquery.com/jquery.js"></script>
     <!-- Bootstrap JavaScript -->
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
+    <!-- Google Maps JavaScript -->
+    <!-- <script async defer
+       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNEuahujgW6PKmTndNwf6yDxzGm20-TBc&callback=initMap">
+   </script> -->
+   <script src="https://unpkg.com/leaflet@0.7.7/dist/leaflet.js"></script>
+   <!-- Local JavaScript -->
     <script src="/js/script.js"></script>
   </body>
 </html>

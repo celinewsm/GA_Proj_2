@@ -9,13 +9,13 @@ router.get('/signup', function(req, res) {
 });
 
 router.post('/signup', function(req, res) {
-  db.user.findOrCreate({
+  db.member.findOrCreate({
     where: { email: req.body.email },
     defaults: {
       name: req.body.name,
       password: req.body.password
     }
-  }).spread(function(user, created) {
+  }).spread(function(member, created) {
     if (created) {
       // FLASH
       passport.authenticate('local', {

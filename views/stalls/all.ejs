@@ -1,0 +1,18 @@
+<a href="/" class="btn btn-success pull-right">Create New Stall</a>
+
+<h1>All Listings</h1>
+
+<% stalls.forEach(function(stall) { %>
+<div class="well">
+  <h2><a href="/stalls/<%= stall.id %>"><%= stall.name %></a><br>
+    <small>Address: <%= stall.address %></small><br>
+    <small>Account Manager: <%= stall.accountMgr %></small><br>
+    <small>Last Order: <%= stall.lastOrders %></small><br>
+    <small>Contact: <%= stall.contactNo %></small><br>
+  </h2>
+  <a href="/stalls/<%= stall.id %>/edit" class="btn btn-info glyphicon glyphicon-edit"></a>
+  <!-- <a href="/stalls/<%= stall.id %>" class="btn btn-danger glyphicon glyphicon-trash delete-btn"></a> -->
+</div>
+<% }); %>
+
+<a href="/">&larr; Home</a>

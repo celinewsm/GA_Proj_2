@@ -6,8 +6,8 @@ var db = require('../models');
  * Passport "serializes" objects to make them easy to store, converting the
  * user to an identifier (id)
  */
-passport.serializeUser(function(user, cb) {
-  cb(null, user.id);
+passport.serializeUser(function(member, cb) {
+  cb(null, member.id);
 });
 
 /*
@@ -15,8 +15,8 @@ passport.serializeUser(function(user, cb) {
  * and looking it up in the database
  */
 passport.deserializeUser(function(id, cb) {
-  db.user.findById(id).then(function(user) {
-    cb(null, user);
+  db.member.findById(id).then(function(member) {
+    cb(null, member);
   }).catch(cb);
 });
 
@@ -41,16 +41,16 @@ passport.deserializeUser(function(id, cb) {
  * there's no user.
  */
 passport.use(new LocalStrategy({
-  usernameField: 'email',
+  emailField: 'email',
   passwordField: 'password'
 }, function(email, password, cb) {
-  db.user.find({
+  db.member.find({
     where: { email: email }
   }).then(function(user) {
-    if (!user || !user.validPassword(password)) {
+    if (!member || !member.validPassword(password)) {
       cb(null, false);
     } else {
-      cb(null, user);
+      cb(null, member);
     }
   }).catch(cb);
 }));
