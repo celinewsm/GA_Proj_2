@@ -41,12 +41,12 @@ passport.deserializeUser(function(id, cb) {
  * there's no user.
  */
 passport.use(new LocalStrategy({
-  emailField: 'email',
+  usernameField: 'email',
   passwordField: 'password'
 }, function(email, password, cb) {
   db.member.find({
     where: { email: email }
-  }).then(function(user) {
+  }).then(function(member) {
     if (!member || !member.validPassword(password)) {
       cb(null, false);
     } else {

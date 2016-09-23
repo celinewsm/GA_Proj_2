@@ -4,7 +4,8 @@
 $(function() {
   $('.edit-form').submit(function(e) {
     e.preventDefault();
-    var currentId = this.id
+    console.log(this)
+    var currentId = $("#PUTid").val();
     var url = '/stalls/' + currentId
     var data = $(this).serialize();
 
@@ -13,7 +14,7 @@ $(function() {
       method: 'PUT',
       data: data
     }).done(function() {
-      window.location.href = '/stalls/' + currentId;
+      window.location.href = '/';
     });
   });
 ///////////////////PREVENT DEFAULT FOR EDIT ROUTE
@@ -36,7 +37,7 @@ $(function() {
 
 
 ///////////////////SETTING UP MAPBOX
-var mymap = L.map('mapid').setView([1.3521, 103.8198], 14)
+var mymap = L.map('mapid').setView([1.3521, 103.8198], 11)
 
  L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token={accessToken}', {
    attribution: '<a href="http://mapbox.com">Mapbox</a>',

@@ -20,14 +20,14 @@ var geocoder = NodeGeocoder(options);
 /////////////////////////////////////////////////NodeGeocoder stuff
 
 /////////////////////////////////////////////////GET /
-router.get('/', function(req, res) {
+router.get('/', isLoggedIn, function(req, res) {
   res.render('index');
 });
 /////////////////////////////////////////////////GET /
 
 
 /////////////////////////////////////////////////GET /<ALL>stalls
-router.get('/stalls', function (req, res){
+router.get('/stalls', isLoggedIn, function (req, res){
   db.stall.findAll().then(function(stalls) {
     res.json(stalls)
     // res.render('stalls/all', {stalls: stalls});
@@ -37,7 +37,7 @@ router.get('/stalls', function (req, res){
 /////////////////////////////////////////////////GET /<ALL>stalls
 
 /////////////////////////////////////////////////GET /id
-router.get('/stalls/:id', function (req, res){
+router.get('/stalls/:id', isLoggedIn, function (req, res){
   db.stall.findById(req.params.id).then(function(stall) {
     if (stall) {
       res.render('stalls/show', {stall: stall});
@@ -53,7 +53,7 @@ router.get('/stalls/:id', function (req, res){
 
 
 /////////////////////////////////////////////////PUT /
-router.put('/', function(req, res) {
+router.put('/', isLoggedIn, function(req, res) {
 
   db.stall.update({
     name: req.body.name,
@@ -63,7 +63,7 @@ router.put('/', function(req, res) {
     contactNo: req.body.contactNo
   }, {
     where: {
-      id: parseInt(req.body.id)
+      id: parsent(req.body.id)
     }
   }).then(function(){
     res.redirect('/');
@@ -78,7 +78,7 @@ router.put('/', function(req, res) {
 
 
 /////////////////////////////////////////////////PUT /stalls/:id
-router.put('/stalls/:id', function(req, res) {
+router.put('/stalls/:id', isLoggedIn, function(req, res) {
   db.stall.update({
     name: req.body.name,
     address: req.body.address,
@@ -100,7 +100,7 @@ router.put('/stalls/:id', function(req, res) {
 
 
 /////////////////////////////////////////////////POST /
-router.post('/', function(req, res) {
+router.post('/', isLoggedIn, function(req, res) {
   geocoder.geocode({address: req.body.address, country: 'Singapore'}, function(err, geoOutput) {
     var outputLat = parseFloat(geoOutput[0].latitude);
     var outputLng = parseFloat(geoOutput[0].longitude);
@@ -117,7 +117,7 @@ router.post('/', function(req, res) {
 
 
 
-router.delete('/stalls/:id', function(req, res) {
+router.delete('/stalls/:id', isLoggedIn, function(req, res) {
   db.stall.findById(req.params.id).then(function(stall) {
     if (stall) {
       stall.destroy().then(function() {
@@ -131,7 +131,7 @@ router.delete('/stalls/:id', function(req, res) {
   });
 });
 
-router.get('/stallinfo/:id', function(req,res){
+router.get('/stallinfo/:id', isLoggedIn, function(req,res){
   db.stall.findById(req.params.id).then(function(stall) {
 
       res.json(stall);
