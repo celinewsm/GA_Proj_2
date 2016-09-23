@@ -22,14 +22,14 @@ $(function() {
 ///////////////////PREVENT DEFAULT FOR DEL ROUTE
   $('.delete-entry').submit(function(e) {
     e.preventDefault();
-    var currentId = this.id
+    var currentId = $("#PUTid").val();
     var url = '/stalls/' + currentId
 
     $.ajax({
       url: url,
       method: 'DELETE'
     }).done(function() {
-      window.location.href = '/stalls';
+      window.location.href = '/';
     });
   });
 });
@@ -97,9 +97,46 @@ function onClick(e) {
         $('#PUTaccountMgr').val(data.accountMgr);
         $('#PUTlastOrders').val(data.lastOrders);
         $('#PUTcontactNo').val(data.contactNo);
+        $('#DELid').val(data.id);
+        $('#DELname').val(data.name);
+        $('#DELaddress').val(data.address);
+        $('#DELaccountMgr').val(data.accountMgr);
+        $('#DELlastOrders').val(data.lastOrders);
+        $('#DELcontactNo').val(data.contactNo);
       })
     }
     populate();
   });
 }
+///////////////////GET / WITH MARKERS CLICKS
+
+
+
+///////////////////GET / SHOW FORMS
+$(document).ready(function(){
+    $("#getGETform").click(function(){
+        $("#PUTform").hide();
+        $("#POSTform").hide();
+        $("#DELform").hide();
+        $("#GETform").show();
+    });
+    $("#getPUTform").click(function(){
+        $("#PUTform").show();
+        $("#POSTform").hide();
+        $("#DELform").hide();
+        $("#GETform").hide();
+    });
+    $("#getPOSTform").click(function(){
+        $("#PUTform").hide();
+        $("#POSTform").show();
+        $("#DELform").hide();
+        $("#GETform").hide();
+    });
+    $("#getDELform").click(function(){
+        $("#PUTform").hide();
+        $("#POSTform").hide();
+        $("#DELform").show();
+        $("#GETform").hide();
+    });
+});
 ///////////////////GET / WITH MARKERS CLICKS

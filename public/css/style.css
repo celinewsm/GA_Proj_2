@@ -2,6 +2,10 @@
   margin: 0;
 }
 
+.topMargin {
+  margin-top: 10px;
+}
+
 .oneHundWid {
   width:100%;
 }
@@ -10,7 +14,25 @@
   display: inline-block;
 }
 
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h2 {
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+}
+
 #mapid {
        width: 100%;
        height: 400px;
+}
+
+.responsive-width {
+    width: 22%;
+    min-width: 75px;
 }

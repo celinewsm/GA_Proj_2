@@ -75,6 +75,22 @@ router.put('/', isLoggedIn, function(req, res) {
 /////////////////////////////////////////////////PUT /
 
 
+/////////////////////////////////////////////////DELETE /
+router.delete('/', isLoggedIn, function(req, res) {
+  db.stall.findById(req.body.id).then(function(stall) {
+    if (stall) {
+      stall.destroy().then(function() {
+        res.send({msg: 'success'});
+      });
+    } else {
+      res.status(404).send({msg: 'error'});
+    }
+  }).catch(function(err) {
+    res.status(500).send({msg: 'error'});
+  });
+});
+/////////////////////////////////////////////////DELETE /
+
 
 
 /////////////////////////////////////////////////PUT /stalls/:id
@@ -114,6 +130,10 @@ router.post('/', isLoggedIn, function(req, res) {
   });
 });
 /////////////////////////////////////////////////POST /
+
+
+
+
 
 
 
